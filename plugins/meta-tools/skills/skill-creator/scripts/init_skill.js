@@ -104,25 +104,27 @@ Files not intended to be loaded into context, but rather used within the output 
 **Any unneeded directories can be deleted.** Not every skill requires all three types of resources.
 `;
 
-const getExampleScript = (skillName) => `#!/usr/bin/env python3
-"""
-Example helper script for ${skillName}
+const getExampleScript = (skillName) => `#!/usr/bin/env node
+/**
+ * Example helper script for ${skillName}
+ *
+ * This is a placeholder script that can be executed directly.
+ * Replace with actual implementation or delete if not needed.
+ *
+ * Example real scripts from other skills:
+ * - pdf/scripts/fill_fillable_fields.js - Fills PDF form fields
+ * - pdf/scripts/convert_pdf_to_images.js - Converts PDF pages to images
+ */
 
-This is a placeholder script that can be executed directly.
-Replace with actual implementation or delete if not needed.
+async function main() {
+    console.log("This is an example script for ${skillName}");
+    // TODO: Add actual script logic here
+    // This could be data processing, file conversion, API calls, etc.
+}
 
-Example real scripts from other skills:
-- pdf/scripts/fill_fillable_fields.py - Fills PDF form fields
-- pdf/scripts/convert_pdf_to_images.py - Converts PDF pages to images
-"""
-
-def main():
-    print("This is an example script for ${skillName}")
-    # TODO: Add actual script logic here
-    # This could be data processing, file conversion, API calls, etc.
-
-if __name__ == "__main__":
-    main()
+if (require.main === module) {
+    main().catch(console.error);
+}
 `;
 
 const getExampleReference = (skillTitle) => `# Reference Documentation for ${skillTitle}
