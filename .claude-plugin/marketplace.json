@@ -1,0 +1,30 @@
+{
+  "name": "dani-lab-skills",
+  "owner": {
+    "name": "DaniLab",
+    "email": "[email protected]"
+  },
+  "metadata": {
+    "description": "Professional Agent Skills for Claude Code - ",
+    "version": "1.0.0",
+    "pluginRoot": "./plugins"
+  },
+  "plugins": [
+    {
+      "name": "backend-tools",
+      "source": "./plugins/backend-tools",
+      "description": "Backend development: backend-development (Node.js/Go)",
+      "version": "1.0.0",
+      "keywords": ["backend", "nodejs", "go", "API", "Rest/GraphQL"],
+      "category": "productivity"
+    },
+    {
+      "name": "meta-tools",
+      "source": "./plugins/meta-tools",
+      "description": "Meta development: skill-creator (create new skills)",
+      "version": "1.0.0",
+      "keywords": ["meta", "skill-creation"],
+      "category": "productivity"
+    }
+  ]
+}
