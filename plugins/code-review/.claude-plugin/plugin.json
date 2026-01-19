@@ -1,0 +1,11 @@
+{
+  "name": "code-review",
+  "description": "Code review workflows and best practices",
+  "version": "1.0.0",
+  "author": {
+    "name": "DaniLab",
+    "email": "[email protected]"
+  },
+  "repository": "https://github.com/artur-dani/claude-skill-collection",
+  "license": "MIT"
+}
