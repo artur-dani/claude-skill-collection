@@ -4,10 +4,12 @@ A plugin marketplace for [Claude Code](https://claude.ai/code) containing [Agent
 
 ## Available Plugins
 
-| Plugin | Description | Skills Included |
+| Plugin | Description | Skills/Commands |
 |--------|-------------|-----------------|
-| **backend-tools** | Backend development with Node.js, Go, REST/GraphQL APIs | `backend-development` |
-| **meta-tools** | Development tooling and workflows | `skill-creator`, `code-review` |
+| **backend-tools** | Backend development with Node.js, Go, REST/GraphQL APIs | `backend-development` skill |
+| **git** | Git workflow commands | `/git:cm`, `/git:cp`, `/git:pr` |
+| **skill-creator** | Guide for creating Agent Skills | `skill-creator` skill |
+| **code-review** | Code review workflows and best practices | `code-review` skill |
 
 ## Installation
 
@@ -39,8 +41,14 @@ Or install directly via command line:
 # Install backend-tools plugin
 /plugin install backend-tools@artur-dani-claude-skill-collection
 
-# Install meta-tools plugin
-/plugin install meta-tools@artur-dani-claude-skill-collection
+# Install git plugin
+/plugin install git@artur-dani-claude-skill-collection
+
+# Install skill-creator plugin
+/plugin install skill-creator@artur-dani-claude-skill-collection
+
+# Install code-review plugin
+/plugin install code-review@artur-dani-claude-skill-collection
 ```
 
 ### Installation Scopes
@@ -61,12 +69,13 @@ Once installed, skills activate automatically based on context:
 
 ### Custom Commands
 
-The `meta-tools` plugin includes slash commands:
+The `git` plugin provides slash commands:
 
 | Command | Description |
 |---------|-------------|
-| `/meta-tools:cm` | Stage all files and create a conventional commit |
-| `/meta-tools:pr` | Create a pull request using GitHub CLI |
+| `/git:cm` | Stage all files and create a conventional commit |
+| `/git:cp` | Commit and push changes |
+| `/git:pr` | Create a pull request using GitHub CLI |
 
 ## Managing Plugins
 
@@ -102,14 +111,23 @@ claude-skill-collection/
 │   │   │   └── plugin.json    # Plugin metadata
 │   │   └── skills/
 │   │       └── backend-development/
-│   └── meta-tools/
+│   ├── git/
+│   │   ├── .claude-plugin/
+│   │   │   └── plugin.json
+│   │   └── commands/
+│   │       ├── cm.md
+│   │       ├── cp.md
+│   │       └── pr.md
+│   ├── skill-creator/
+│   │   ├── .claude-plugin/
+│   │   │   └── plugin.json
+│   │   └── skills/
+│   │       └── skill-creator/
+│   └── code-review/
 │       ├── .claude-plugin/
 │       │   └── plugin.json
-│       ├── commands/
-│       │   └── git/
 │       └── skills/
-│           ├── code-review/
-│           └── skill-creator/
+│           └── code-review/
 └── README.md
 ```
 

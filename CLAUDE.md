@@ -20,16 +20,28 @@ claude-plugins/
 │   │       └── backend-development/
 │   │           ├── SKILL.md      # Main skill file
 │   │           └── references/   # Backend reference docs
-│   └── meta-tools/               # Meta development tools
+│   ├── git/                      # Git workflow commands
+│   │   ├── .claude-plugin/
+│   │   │   └── plugin.json
+│   │   └── commands/
+│   │       ├── cm.md             # Commit command
+│   │       ├── cp.md             # Commit & push command
+│   │       └── pr.md             # Pull request command
+│   ├── skill-creator/            # Skill creation workflows
+│   │   ├── .claude-plugin/
+│   │   │   └── plugin.json
+│   │   └── skills/
+│   │       └── skill-creator/
+│   │           ├── SKILL.md
+│   │           ├── references/
+│   │           └── scripts/
+│   └── code-review/              # Code review workflows
 │       ├── .claude-plugin/
-│       │   └── plugin.json       # Plugin metadata
-│       ├── commands/             # Custom commands
-│       │   ├── git/              # Git workflow commands
-│       │   └── skill/            # Skill creation commands
+│       │   └── plugin.json
 │       └── skills/
-│           ├── code-review/      # Code review workflows
-│           └── skill-creator/    # Skill creation workflows
-│               └── scripts/      # Skill creation automation
+│           └── code-review/
+│               ├── SKILL.md
+│               └── references/
 └── README.md
 ```
 
@@ -55,9 +67,8 @@ claude-plugins/
   - `commands`: Optional array of command paths
 
 ### Plugin Types
-1. **Skill Plugins:** Provide specialized Agent Skills (e.g., backend-tools)
-2. **Command Plugins:** Provide custom slash commands (e.g., meta-tools)
-3. **Hybrid Plugins:** Combine skills and commands (e.g., meta-tools)
+1. **Skill Plugins:** Provide specialized Agent Skills (e.g., backend-tools, skill-creator, code-review)
+2. **Command Plugins:** Provide custom slash commands (e.g., git)
 
 ## Agent Skills Architecture
 
@@ -86,11 +97,11 @@ skill-name/
 ## Skill Creation Workflow
 
 ### Using Skill Creator Scripts
-The meta-tools plugin provides automation scripts for skill development:
+The skill-creator plugin provides automation scripts for skill development:
 
 1. **Initialize New Skill**
    ```bash
-   node plugins/meta-tools/skills/skill-creator/scripts/init_skill.js <skill-name> --path <output-directory>
+   plugins/skill-creator/skills/skill-creator/scripts/init_skill.sh <skill-name> <output-directory>
    ```
    - Creates skill directory with proper structure
    - Generates SKILL.md template with frontmatter
@@ -98,47 +109,33 @@ The meta-tools plugin provides automation scripts for skill development:
 
 2. **Validate Skill**
    ```bash
-   node plugins/meta-tools/skills/skill-creator/scripts/quick_validate.js <path/to/skill-folder>
+   plugins/skill-creator/skills/skill-creator/scripts/validate_skill.sh <path/to/skill-folder>
    ```
    - Validates YAML frontmatter format
    - Checks required fields and naming conventions
    - Verifies directory structure
 
-3. **Package Skill**
-   ```bash
-   node plugins/meta-tools/skills/skill-creator/scripts/package_skill.js <path/to/skill-folder> [output-dir]
-   ```
-   - Automatically validates first
-   - Creates distributable zip file
-   - Maintains proper directory structure
-
 ### Skill Creation Process (from skill-creator SKILL.md)
 1. **Understand with Examples:** Gather concrete use cases
 2. **Plan Reusable Contents:** Identify scripts, references, assets needed
-3. **Initialize Skill:** Run `init_skill.js` to generate template
+3. **Initialize Skill:** Run `init_skill.sh` to generate template
 4. **Edit Skill:** Implement bundled resources, update SKILL.md
-5. **Package:** Run `package_skill.js` to validate and package
+5. **Validate:** Run `validate_skill.sh` to check skill
 6. **Iterate:** Test and refine based on usage
 
 ## Custom Commands
 
-### Git Commands (meta-tools)
-- **Location:** `plugins/meta-tools/commands/git/`
-- **/cm (commit):** Stage all files and create conventional commits
+### Git Commands (git plugin)
+- **Location:** `plugins/git/commands/`
+- **/git:cm (commit):** Stage all files and create conventional commits
   - Follows conventional commit rules (feat, fix, perf, refactor, etc.)
   - NO AI attribution signatures (no "Co-Authored-By: Claude" or similar)
   - Split new files and changes into separate commits
   - DO NOT push to remote automatically
-- **/pr (pull request):** Create pull request using `gh` CLI
+- **/git:cp (commit & push):** Stage, commit, and push to remote
+- **/git:pr (pull request):** Create pull request using `gh` CLI
   - Arguments: [to-branch] [from-branch]
   - Defaults: to-branch=main, from-branch=current
-
-### Skill Commands (meta-tools)
-- **Location:** `plugins/meta-tools/commands/skill/`
-- **/create:** Create new agent skill
-  - Uses skill-creator workflow
-  - Requires reading Agent Skills spec and documentation
-  - Supports URL exploration for documentation-based skills
 
 ## Key Skills Reference
 
@@ -148,13 +145,13 @@ The meta-tools plugin provides automation scripts for skill development:
 - **Topics:** API design (REST/GraphQL/gRPC), authentication (OAuth 2.1, JWT), security (OWASP Top 10), performance, testing, DevOps
 - **References:** 11 reference files covering technologies, API design, security, authentication, performance, architecture, testing, code quality, DevOps, debugging, mindset
 
-### skill-creator (meta-tools)
+### skill-creator (skill-creator plugin)
 - **Purpose:** Guide for creating effective Agent Skills
 - **Process:** 6-step workflow from understanding to iteration
-- **Scripts:** init_skill.js, quick_validate.js, package_skill.js
+- **Scripts:** init_skill.sh, validate_skill.sh
 - **Key Principle:** Progressive disclosure (metadata → SKILL.md → bundled resources)
 
-### code-review (meta-tools)
+### code-review (code-review plugin)
 - **Purpose:** Proper code review practices with technical rigor
 - **Three Practices:**
   1. Receiving feedback: Technical evaluation over performative agreement
@@ -171,10 +168,10 @@ The meta-tools plugin provides automation scripts for skill development:
 - Use assets/ for templates and output resources
 
 ### Naming Conventions
-- Plugin names: kebab-case (e.g., backend-tools, meta-tools)
+- Plugin names: kebab-case (e.g., backend-tools, git, skill-creator, code-review)
 - Skill names: kebab-case (e.g., backend-development, skill-creator)
 - File names: SKILL.md (uppercase), kebab-case for others
-- Script files: snake_case.js or snake_case.py
+- Script files: snake_case.sh, snake_case.js, or snake_case.py
 
 ### Script Requirements
 - Prefer Node.js or Python over Bash (Windows compatibility)
