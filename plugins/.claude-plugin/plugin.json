@@ -1,6 +1,6 @@
 {
-  "name": "skills",
-  "description": "Core skills: brainstorming, code-review, skill-creator",
+  "name": "dl",
+  "description": "Core development skills: brainstorming, code-review, skill-creator",
   "version": "1.0.0",
   "author": {
     "name": "DaniLab",

@@ -6,10 +6,9 @@ A plugin marketplace for [Claude Code](https://claude.ai/code) containing [Agent
 
 | Plugin | Description | Skills/Commands |
 |--------|-------------|-----------------|
-| **backend-tools** | Backend development with Node.js, Go, REST/GraphQL APIs | `backend-development` skill |
+| **backend-tools** | Backend development with Node.js, Go, REST/GraphQL APIs | `/backend-tools:backend-development` |
 | **git** | Git workflow commands | `/git:cm`, `/git:cp`, `/git:pr` |
-| **skill-creator** | Guide for creating Agent Skills | `skill-creator` skill |
-| **code-review** | Code review workflows and best practices | `code-review` skill |
+| **dl** | Core development skills | `/brainstorming`, `/code-review`, `/skill-creator` |
 
 ## Installation
 
@@ -39,35 +38,54 @@ Or install directly via command line:
 
 ```
 # Install backend-tools plugin
-/plugin install backend-tools@artur-dani-claude-skill-collection
+/plugin install backend-tools@dani-lab-skills
 
 # Install git plugin
-/plugin install git@artur-dani-claude-skill-collection
+/plugin install git@dani-lab-skills
 
-# Install skill-creator plugin
-/plugin install skill-creator@artur-dani-claude-skill-collection
-
-# Install code-review plugin
-/plugin install code-review@artur-dani-claude-skill-collection
+# Install dl plugin (brainstorming, code-review, skill-creator)
+/plugin install dl@dani-lab-skills
 ```
 
 ### Installation Scopes
 
-When installing, choose the appropriate scope:
+When installing, choose the appropriate scope for your needs:
 
-- **User scope** (default): Available across all your projects
-- **Project scope**: Shared with all collaborators via `.claude/settings.json`
-- **Local scope**: Only for you in the current repository
+#### User Scope (default)
+Available across all your projects. Stored in `~/.claude/`.
+
+```
+/plugin install dl@dani-lab-skills
+```
+
+#### Project Scope
+Shared with all collaborators via `.claude/settings.json`. Use this when the whole team should have access.
+
+```
+/plugin install dl@dani-lab-skills --scope project
+```
+
+#### Local Scope
+Only for you in the current repository. Not shared with collaborators.
+
+```
+/plugin install dl@dani-lab-skills --scope local
+```
 
 ## Usage
 
-Once installed, skills activate automatically based on context:
+### Skills
 
-- **backend-development**: Activates when working on backend code, REST APIs, authentication
-- **skill-creator**: Activates when creating new Agent Skills
-- **code-review**: Activates during code review workflows
+Skills activate automatically based on context, or invoke them directly:
 
-### Custom Commands
+| Skill | Invocation | Description |
+|-------|------------|-------------|
+| brainstorming | `/brainstorming` | Collaborative dialogue for turning ideas into designs |
+| code-review | `/code-review` | Code review workflows and best practices |
+| skill-creator | `/skill-creator` | Guide for creating effective Agent Skills |
+| backend-development | `/backend-tools:backend-development` | Backend development with modern technologies |
+
+### Git Commands
 
 The `git` plugin provides slash commands:
 
@@ -90,13 +108,13 @@ Then navigate to the **Installed** tab.
 Update marketplace to get latest plugins:
 
 ```
-/plugin marketplace update artur-dani-claude-skill-collection
+/plugin marketplace update dani-lab-skills
 ```
 
 Uninstall a plugin:
 
 ```
-/plugin uninstall backend-tools@artur-dani-claude-skill-collection
+/plugin uninstall dl@dani-lab-skills
 ```
 
 ## Repository Structure
@@ -106,28 +124,28 @@ claude-skill-collection/
 ├── .claude-plugin/
 │   └── marketplace.json       # Marketplace configuration
 ├── plugins/
-│   ├── backend-tools/
+│   ├── backend-tools/         # Standalone plugin
 │   │   ├── .claude-plugin/
-│   │   │   └── plugin.json    # Plugin metadata
+│   │   │   └── plugin.json
 │   │   └── skills/
 │   │       └── backend-development/
-│   ├── git/
+│   ├── git/                   # Standalone plugin
 │   │   ├── .claude-plugin/
 │   │   │   └── plugin.json
 │   │   └── commands/
 │   │       ├── cm.md
 │   │       ├── cp.md
 │   │       └── pr.md
-│   ├── skill-creator/
-│   │   ├── .claude-plugin/
-│   │   │   └── plugin.json
-│   │   └── skills/
-│   │       └── skill-creator/
-│   └── code-review/
-│       ├── .claude-plugin/
-│       │   └── plugin.json
-│       └── skills/
-│           └── code-review/
+│   └── skills/                # dl plugin (bundled skills)
+│       ├── brainstorming/
+│       │   └── SKILL.md
+│       ├── code-review/
+│       │   ├── SKILL.md
+│       │   └── references/
+│       └── skill-creator/
+│           ├── SKILL.md
+│           ├── references/
+│           └── scripts/
 └── README.md
 ```
 
