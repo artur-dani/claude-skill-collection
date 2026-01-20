@@ -27,11 +27,11 @@
       "category": "productivity"
     },
     {
-      "name": "skills",
+      "name": "dl",
       "source": "./plugins/skills",
-      "description": "Core skills: brainstorming, code-review, skill-creator",
+      "description": "Brainstorming, design, and planning assistance",
       "version": "1.0.0",
-      "keywords": ["brainstorming", "code-review", "skill-creator", "design", "planning"],
+      "keywords": ["brainstorming", "design", "planning"],
       "category": "productivity"
     }
   ]
