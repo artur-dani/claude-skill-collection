@@ -41,6 +41,14 @@
       "version": "1.0.0",
       "keywords": ["code-review", "review"],
       "category": "productivity"
+    },
+    {
+      "name": "brainstorming",
+      "source": "./plugins/brainstorming",
+      "description": "Collaborative dialogue skill for turning ideas into designs",
+      "version": "1.0.0",
+      "keywords": ["brainstorming", "design", "planning"],
+      "category": "productivity"
     }
   ]
 }
