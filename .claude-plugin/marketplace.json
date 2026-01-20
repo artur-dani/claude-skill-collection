@@ -27,27 +27,11 @@
       "category": "productivity"
     },
     {
-      "name": "skill-creator",
-      "source": "./plugins/skill-creator",
-      "description": "Guide for creating effective Agent Skills",
+      "name": "skills",
+      "source": "./plugins/skills",
+      "description": "Core skills: brainstorming, code-review, skill-creator",
       "version": "1.0.0",
-      "keywords": ["skills", "creation"],
-      "category": "productivity"
-    },
-    {
-      "name": "code-review",
-      "source": "./plugins/code-review",
-      "description": "Code review workflows and best practices",
-      "version": "1.0.0",
-      "keywords": ["code-review", "review"],
-      "category": "productivity"
-    },
-    {
-      "name": "brainstorming",
-      "source": "./plugins/brainstorming",
-      "description": "Collaborative dialogue skill for turning ideas into designs",
-      "version": "1.0.0",
-      "keywords": ["brainstorming", "design", "planning"],
+      "keywords": ["brainstorming", "code-review", "skill-creator", "design", "planning"],
       "category": "productivity"
     }
   ]
