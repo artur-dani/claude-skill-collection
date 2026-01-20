@@ -28,7 +28,7 @@
     },
     {
       "name": "dl",
-      "source": "./plugins/skills",
+      "source": "./plugins",
       "description": "Brainstorming, design, and planning assistance",
       "version": "1.0.0",
       "keywords": ["brainstorming", "design", "planning"],
